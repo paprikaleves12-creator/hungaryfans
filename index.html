@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HungaryFans - Fashion Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #cd001a;
+            --primary-dark: #8b0000;
+            --dark: #121212;
+            --dark-light: #1e1e1e;
+            --darker: #0a0a0a;
+            --text: #ffffff;
+            --text-light: #b0b0b0;
+            --card-bg: #1a1a1a;
+            --discord: #5865F2;
+            --tiktok: #000000;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .social-links {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .discord-link {
+            background: var(--discord);
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+        }
+
+        .discord-link:hover {
+            background: #4752c4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(88, 101, 242, 0.5);
+        }
+
+        .tiktok-link {
+            background: var(--tiktok);
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            font-size: 0.9rem;
+        }
+
+        .tiktok-link:hover {
+            background: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .discord-link i, .tiktok-link i {
+            font-size: 1.3rem;
+        }
+
+        .coupon-banner {
+            background: linear-gradient(135deg, #ffd700, #ff6b00);
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+            margin: 1rem 0;
+        }
+
+        .coupon-banner:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.6);
+        }
+
+        .search-box {
+            display: flex;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+            outline: none;
+            background: var(--dark-light);
+            color: var(--text);
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-light);
+        }
+
+        .search-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: var(--primary-dark);
+        }
+
+        nav {
+            background-color: var(--dark-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .categories button {
+            background: var(--dark-light);
+            border: 2px solid var(--primary);
+            color: var(--text);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .categories button:hover, .categories button.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(205, 0, 26, 0.3);
+        }
+
+        main {
+            padding: 2rem 0;
+            min-height: 60vh;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 300px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-image {
+            height: 300px;
+            background: linear-gradient(135deg, var(--dark-light) 0%, var(--dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+        }
+
+        .product-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .product-link:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #7a0000 100%);
+            box-shadow: 0 4px 12px rgba(205, 0, 26, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.2rem;
+            color: var(--primary);
+            grid-column: 1 / -1;
+        }
+
+        .error {
+            text-align: center;
+            padding: 2rem;
+            color: var(--primary);
+            background: rgba(205, 0, 26, 0.1);
+            border-radius: 10px;
+            margin: 2rem 0;
+            grid-column: 1 / -1;
+            border: 1px solid rgba(205, 0, 26, 0.3);
+        }
+
+        footer {
+            background: var(--darker);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .product-badge {
+            background: #000;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+            
+            .social-links {
+                position: relative;
+                top: auto;
+                right: auto;
+                flex-direction: row;
+                justify-content: center;
+                margin-top: 1rem;
+                gap: 15px;
+            }
+            
+            .categories button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .coupon-banner {
+                font-size: 1.1rem;
+                padding: 0.8rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>HungaryFans</h1>
+                </div>
+                <div class="social-links">
+                    <a href="https://discord.gg/k3fVVZphz" class="discord-link" target="_blank">
+                        <i class="fab fa-discord"></i>
+                        Join Discord
+                    </a>
+                    <a href="https://tiktok.com/@hungaryfans" class="tiktok-link" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                        TikTok
+                    </a>
+                </div>
+                <a href="https://cnfans.com/register/?ref=2090524" class="coupon-banner" target="_blank">
+                    🎁 GET $130 COUPON 🎁
+                </a>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search products...">
+                    <button id="searchButton"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="categories" id="categories">
+                <button data-category="all" class="active">All Products</button>
+                <button data-category="tshirt">T-Shirts</button>
+                <button data-category="jacket">Jackets</button>
+                <button data-category="hoodie">Hoodies</button>
+                <button data-category="shoes">Shoes</button>
+                <button data-category="pants">Pants</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h2 class="section-title" id="sectionTitle">Featured Products</h2>
+            <div class="products-grid" id="productsContainer">
+                <!-- Products will load here -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 HungaryFans - Official Store</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const productsContainer = document.getElementById('productsContainer');
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const categoryButtons = document.querySelectorAll('.categories button');
+            const sectionTitle = document.getElementById('sectionTitle');
+            
+            // Sample products for each category - Bape Shirt added
+            const products = [
+                {
+                    name: "BAPE SHIRT",
+                    category: "tshirt",
+                    price: "$15.00",
+                    image: "bape shirt.jfif",
+                    link: "https://cnfans.com/product/?shop_type=weidian&id=7512394496&platform=WEIDIAN&shoptype=WEIDIAN&ref=2090524",
+                    badge: "JAPANESE"
+                },
+                {
+                    name: "GALLERY DEPT JEANS",
+                    category: "pants",
+                    price: "$32.00",
+                    image: "gallery dept jeans.webp",
+                    link: "https://cnfans.com/product/?shop_type=weidian&id=7518842164&platform=WEIDIAN&shoptype=WEIDIAN&ref=2090524",
+                    badge: "DESIGNER"
+                },
+                {
+                    name: "AMIRI JEANS",
+                    category: "pants",
+                    price: "$41.00",
+                    image: "amiri jeans.jpg",
+                    link: "https://cnfans.com/product/?shop_type=weidian&id=7508347168&platform=WEIDIAN&shoptype=WEIDIAN&ref=2090524",
+                    badge: "DESIGNER"
+                },
+                {
+                    name: "PURPLE JEANS",
+                    category: "pants",
+                    price: "$41.00",
+                    image: "purple jeans.jpg",
+                    link: "https://cnfans.com/product/?shop_type=weidian&id=7508626056&platform=WEIDIAN&shoptype=WEIDIAN&ref=2090524",
+                    badge: "TRENDING"
+                },
+                {
+                    name: "BALENCIAGA TRACK SNEAKERS",
+                    category: "shoes",
+                    price: "$77.00",
+                    image: "balenciaga track.webp",
+                    link: "https://cnfans.com/product/?shop_type=ali_1688&id=863876258121&platform=ALI_1688&shoptype=ALI_1688&ref=2090524",
+                    badge: "LUXURY"
+                },
+                {
+                    name: "DENIM TEARS HOODIE",
+                    category: "hoodie",
+                    price: "$15.00",
+                    image: "denim tears hoodie.webp",
+                    link: "https://cnfans.com/product/?shop_type=ali_1688&id=898922176273&platform=ALI_1688&shoptype=ALI_1688&ref=2090524",
+                    badge: "TRENDING"
+                },
+                {
+                    name: "DENIM TEARS T-SHIRT",
+                    category: "tshirt",
+                    price: "$7.00",
+                    image: "denim tears shirt.jfif",
+                    link: "https://cnfans.com/product/?shop_type=ali_1688&id=898922176273&platform=ALI_1688&shoptype=ALI_1688&ref=2090524",
+                    badge: "NEW"
+                },
+                {
+                    name: "DENIM TEARS SHORTS",
+                    category: "pants",
+                    price: "$10.00",
+                    image: " denim tears short.webp",
+                    link: "https://cnfans.com/product/?shop_type=ali_1688&id=775208243943&platform=ALI_1688&shoptype=ALI_1688&ref=2090524",
+                    badge: "SUMMER"
+                },
+                {
+                    name: "ESSENTIALS SHORTS",
+                    category: "pants",
+                    price: "$14.00",
+                    image: "essentials short.webp",
+                    link: "https://cnfans.com/product/?shop_type=ali_1688&id=775208243943&platform=ALI_1688&shoptype=ALI_1688&ref=2090524",
+                    badge: "POPULAR"
+                },
+                {
+                    name: "BURBERRY PUFFER JACKET",
+                    category: "jacket",
+                    price: "$46.00",
+                    image: "burberry puffer.webp",
+                    link: "https://cnfans.com/product/?shop_type=weidian&id=7495454039&platform=WEIDIAN&shoptype=WEIDIAN&ref=2090524",
+                    badge: "LUXURY"
+                },
+                {
+                    name: "RALPH LAUREN ZIPPER HOODIE",
+                    category: "hoodie",
+                    price: "$31.00",
+                    image: "ralph lauren zipper.jpg",
+                    link: "https://cnfans.com/product/?shop_type=weidian&id=7287398614&platform=WEIDIAN&shoptype=WEIDIAN&ref=2090524",
+                    badge: "CLASSIC"
+                },
+                {
+                    name: "DIOR B30 SNEAKERS",
+                    category: "shoes",
+                    price: "$90.00",
+                    image: "dior b30.avif",
+                    link: "https://cnfans.com/product/?shop_type=weidian&id=7234587290&platform=WEIDIAN&shoptype=WEIDIAN&ref=2090524",
+                    badge: "LUXURY"
+                },
+                {
+                    name: "STUSSY T-SHIRT",
+                    category: "tshirt",
+                    price: "$14.00",
+                    image: "stussy tee.webp",
+                    link: "https://cnfans.com/product/?shop_type=weidian&id=7360864167&platform=WEIDIAN&shoptype=WEIDIAN&ref=2090524",
+                    badge: "NEW"
+                },
+                {
+                    name: "ESSENTIALS HOODIE",
+                    category: "hoodie",
+                    price: "$22.00",
+                    image: "essentials hoodie.webp",
+                    link: "https://cnfans.com/product/?shop_type=weidian&id=7450594219&platform=WEIDIAN&shoptype=WEIDIAN&ref=2090524",
+                    badge: "POPULAR"
+                },
+                {
+                    name: "LV SKATE SNEAKERS",
+                    category: "shoes",
+                    price: "$112.00",
+                    image: "lv skate.avif",
+                    link: "https://cnfans.com/product/?shop_type=weidian&id=7413786532&platform=WEIDIAN&shoptype=WEIDIAN&ref=2090524",
+                    badge: "LUXURY"
+                },
+                {
+                    name: "MOOSE KNUCKLES JACKET",
+                    category: "jacket",
+                    price: "$73.66",
+                    image: "moose knukles.jpg",
+                    link: "https://cnfans.com/product/?shop_type=ali_1688&id=692090092934&platform=ALI_1688&shoptype=ALI_1688&ref=2090524",
+                    badge: "PREMIUM"
+                },
+                {
+                    name: "STUSSY BASIC T-SHIRT",
+                    category: "tshirt",
+                    price: "$14.26",
+                    image: "stussy.jpg",
+                    link: "https://cnfans.com/product/?shop_type=weidian&id=7482234805&ref=2090524",
+                    badge: "BESTSELLER"
+                },
+                {
+                    name: "AMI SWEATER",
+                    category: "hoodie",
+                    price: "$11.53",
+                    image: "ami sweater.jfif",
+                    link: "https://cnfans.com/product/?shop_type=ali_1688&id=935000390973&platform=ALI_1688&shoptype=ALI_1688&ref=2090524",
+                    badge: "TRENDING"
+                }
+            ];
+
+            let filteredProducts = [...products];
+
+            // Display products immediately
+            function displayProducts(productsToDisplay) {
+                productsContainer.innerHTML = '';
+                
+                if (productsToDisplay.length === 0) {
+                    productsContainer.innerHTML = `
+                        <div class="error">
+                            <i class="fas fa-search"></i>
+                            <h3>No products found</h3>
+                            <p>Try a different search term.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                productsToDisplay.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    
+                    productCard.innerHTML = `
+                        <div class="product-badge">${product.badge}</div>
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}" onerror="this.src='https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
+                        </div>
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <div class="product-price">${product.price}</div>
+                            <a href="${product.link}" class="product-link" target="_blank">
+                                BUY NOW <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </div>
+                    `;
+                    
+                    productsContainer.appendChild(productCard);
+                });
+            }
+
+            // Search function
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                if (searchTerm === '') {
+                    filteredProducts = [...products];
+                } else {
+                    filteredProducts = products.filter(product => 
+                        product.name.toLowerCase().includes(searchTerm) ||
+                        product.category.toLowerCase().includes(searchTerm)
+                    );
+                }
+                
+                displayProducts(filteredProducts);
+            }
+
+            // Category filter
+            function filterByCategory(category) {
+                const categoryNames = {
+                    'all': 'Featured Products',
+                    'tshirt': 'T-Shirts',
+                    'jacket': 'Jackets',
+                    'hoodie': 'Hoodies',
+                    'shoes': 'Shoes',
+                    'pants': 'Pants'
+                };
+                
+                sectionTitle.textContent = categoryNames[category];
+                
+                if (category === 'all') {
+                    filteredProducts = [...products];
+                } else {
+                    filteredProducts = products.filter(product => product.category === category);
+                }
+                
+                displayProducts(filteredProducts);
+            }
+
+            // Event handlers
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    filterByCategory(category);
+                });
+            });
+
+            // Load products immediately
+            displayProducts(products);
+        });
+    </script>
+</body>
+</html>
